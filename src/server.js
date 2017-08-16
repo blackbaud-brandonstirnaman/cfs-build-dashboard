@@ -11,6 +11,7 @@ const proxy = require('http-proxy').createProxyServer({
 
 const htmlPage = fs.readFileSync('index.html').toString();
 const jsPage = fs.readFileSync('main.js').toString();
+const cssPage = fs.readFileSync('main.css').toString();
 const server = http.createServer((req, res) => {
   let url = `${baseUrl}/${collectionPath}`;
   if (req.url.startsWith('/vsrm')) {
@@ -21,7 +22,9 @@ const server = http.createServer((req, res) => {
   if (req.url === '/favicon.ico') {
     return res.end();
   } else if (req.url === '/main.js') {
-    return res.end(mainJs);
+    return res.end(jsPage);
+  } else if (req.url === '/main.css') {
+    return res.end(cssPage);
   } else if (req.url === '/index.html') {
     return res.end(htmlPage);
   }

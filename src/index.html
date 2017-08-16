@@ -1,7 +1,81 @@
 <html>
-  <head>
-  </head>
-  <body>
-    Oh look stuff
-  </body>
+<head>
+  <title>Build Dashboard</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" type="text/css" href="main.css">
+  <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.10/handlebars.min.js"></script>
+  <script>
+    moment().format();
+  </script>
+  <script src="main.js"></script>
+  <link href='http://fonts.googleapis.com/css?family=Droid+Sans:400,700' rel='stylesheet' type='text/css'>
+
+</head>
+<body onload="showBuilds()">
+<div id="recent-builds-template">
+  <h3>Recent Builds ({{window}} hrs)</h3>
+  <ul>
+    {{#each data}}
+    <li class="recent-build">
+      {{#if build.isTest}}
+      <div class="test-build">
+                            <span class="build-title">
+                                <a href="{{build._links.web.href}}">{{build.id}}</a>
+                            </span>
+        <span class="build-time">{{build.prettyStartDateTime}} - Build request by {{build.requestedBy.displayName}}</span>
+        <ul>
+          {{#if release.length}}
+          {{#each release.0.environments}}
+          <li>{{name}} - <a href="{{../release.0._links.web.href}}">{{status}}</a></li>
+          {{/each}}
+          {{else}}
+          <li>No release data for this build.</li>
+          {{/if}}
+        </ul>
+      </div>
+      {{else}}
+      <span class="build-title">
+                                <a href="{{build._links.web.href}}">{{build.buildNumber}}</a>
+                                {{build.changes.0.message}}
+                                {{#if build.changes.0.issueURL}}
+                                    <a href="{{build.changes.0.issueURL}}">(VSTS)</a>
+                                {{/if}}
+                                <br/>
+                            </span>
+      <span class="build-time">{{build.prettyStartDateTime}} - PR by {{build.changes.0.author.displayName}}, build request by {{build.requestedBy.displayName}} - {{build.status}}</span>
+
+      <ul>
+        {{#if release.length}}
+        {{#each release.0.environments}}
+        <li>{{name}} - <a href="{{../release.0._links.web.href}}">{{status}}</a>
+          <ul>
+            {{#each preDeployApprovals}}
+            {{#unless isAutomated}}
+            <li>Manual {{approvalType}} - {{status}}</li>
+            {{/unless}}
+            {{/each}}
+          </ul>
+          <!--TODO postDeployApprovals? -->
+        </li>
+        {{/each}}
+        {{else}}
+        <li>No release data for this build.</li>
+        {{/if}}
+      </ul>
+      {{/if}}
+    </li>
+    {{/each}}
+  </ul>
+</div>
+<div id="old-builds-template">
+  <h3>Old Builds</h3>
+  <ul>
+    {{#each data}}
+    <li><a href="{{build._links.web.href}}">{{build.buildNumber}}</a></li>
+    {{/each}}
+  </ul>
+</div>
+</body>
 </html>

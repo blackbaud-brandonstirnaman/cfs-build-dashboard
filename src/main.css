@@ -1,0 +1,31 @@
+ul {
+    list-style: none;
+}
+
+li.recent-build {
+    margin-bottom: 10px;
+}
+
+.build-title {
+    font-weight: bold;
+}
+
+.build-time {
+    font-style: italic;
+    font-size: 12px;
+}
+
+#recent-builds-template {
+    display: none;
+}
+
+#old-builds-template {
+    display: none;
+}
+
+.test-build {
+    color: #505050;
+    background-color: #EEEEEE;
+    font-size: 12px;
+    margin-left: 30px;
+}
