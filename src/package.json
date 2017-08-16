@@ -1,0 +1,19 @@
+{
+  "name": "cfs-build-dashboard",
+  "version": "0.0.1",
+  "description": "",
+  "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://blackbaud-brandonstirnaman@github.com/blackbaud-brandonstirnaman/cfs-build-dashboard.git"
+  },
+  "author": "CFS Development Team",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/blackbaud-brandonstirnaman/cfs-build-dashboard/issues"
+  },
+  "homepage": "https://github.com/blackbaud-brandonstirnaman/cfs-build-dashboard#readme",
+  "dependencies": {
+    "http-proxy": "^1.16.2"
+  }
+}
