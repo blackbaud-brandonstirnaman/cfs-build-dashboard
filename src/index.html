@@ -24,7 +24,7 @@
                             <span class="build-title">
                                 <a href="{{build._links.web.href}}">{{build.id}}</a>
                             </span>
-        <span class="build-time">{{build.prettyStartDateTime}} - Build request by {{build.requestedBy.displayName}}</span>
+        <span class="build-time">{{build.prettyStartDateTime}} - Build request by {{build.requestedBy.displayName}} - {{build.status}}</span>
         <ul>
           {{#if release.length}}
           {{#each release.0.environments}}
